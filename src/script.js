@@ -19,41 +19,63 @@
 //     }
 //   };
 // }
-const darkBtn = document.querySelector(".darkBtn");
-const lightBtn = document.querySelector(".lightBtn");
-const resetBtn = document.querySelector(".resetBtn");
-
-darkBtn.addEventListener("click", changeTheme("dark"));
-lightBtn.addEventListener("click", changeTheme("light"));
-resetBtn.addEventListener("click", changeTheme("reset"));
 
 // document.getElementById("themeHandler1").onclick = changeTheme("dark");
 // document.getElementById("themeHandler2").onclick = changeTheme("light"); //Bad practice!
 // document.getElementById("themeHandler3").onclick = changeTheme("reset");
 
-//switch version
-function changeTheme(theme) {
-  return function () {
-    switch (theme) {
-      case "dark": //Change styles in JavaScript it's a BAD prectise! Be careful! If u wanna change styles - use classes.
-        document.body.style.cssText = ` 
-      background-color: black; 
-      color: white;
+const darkBtn = document.querySelector('.darkBtn');
+const lightBtn = document.querySelector('.lightBtn');
+const resetBtn = document.querySelector('.resetBtn');
+
+const { log } = console;
+
+// darkBtn.addEventListener("click", changeTheme("dark")); //events: click, mouseenter, dblclick, ...and other.
+// lightBtn.addEventListener("click", changeTheme("light"));
+// resetBtn.addEventListener("click", changeTheme("reset"));
+
+const content = document.querySelector('.content');
+
+content.addEventListener('click', function (event) {  //ДЕЛЕГИРОВАНИЕ
+  if (event.target.closest('.darkBtn')) {
+    document.body.style.cssText = ` 
+    background-color: black; 
+    color: white;
     `;
-        break;
-      case "light":
-        document.body.style.cssText = `
-      background-color: aqua;
-      color: black;
-      `;
-        break;
-      case "reset":
-        document.body.style.removeProperty("background-color");
-        document.body.style.removeProperty("color");
-        break;
-    }
-  };
-}
+  } else if (event.target.closest('.lightBtn')) {
+    document.body.style.cssText = `
+    background-color: aqua;
+    color: black;
+    `;
+  } else {
+    document.body.style.removeProperty('background-color');
+    document.body.style.removeProperty('color');
+  }
+});
+
+//switch version
+// function changeTheme(theme) {
+//   return function () {
+//     switch (theme) {
+//       case "dark": //Change styles in JavaScript it's a BAD prectise! Be careful! If u wanna change styles - using classes.
+//         document.body.style.cssText = `
+//       background-color: black;
+//       color: white;
+//     `;
+//         break;
+//       case "light":
+//         document.body.style.cssText = `
+//       background-color: aqua;
+//       color: black;
+//       `;
+//         break;
+//       case "reset":
+//         document.body.style.removeProperty("background-color");
+//         document.body.style.removeProperty("color");
+//         break;
+//     }
+//   };
+// }
 
 // Sandbox with Objects and arrays
 
